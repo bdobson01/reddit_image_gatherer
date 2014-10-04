@@ -28,8 +28,14 @@ $colour = imagecolorallocate($image, 255, 255, 255);
 //  Change font as desired
 $font = '/Library/Fonts/Georgia Italic.ttf';
 
+$height=imagesy($image);
 //  Add the text
-imagettftext($image, 15, 0, 20, 1060, $colour, $font, $text);
+if ($height <= 1280) {
+	$fontsize=15;
+} else {
+	$fontsize=round($height * 15 / 1280);
+}
+imagettftext($image, $fontsize, 0, 20, $height-($height*0.05), $colour, $font, $text);
 
 $filename='titled_'.$argv[1];
 //  Save the image
